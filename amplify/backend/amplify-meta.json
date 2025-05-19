@@ -14,35 +14,30 @@
   },
   "auth": {
     "tourismappe1d5f126": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tourismapp-dev-0ee3e-deployment/amplify-cfn-templates/auth/tourismappe1d5f126-cloudformation-template.json",
-        "logicalId": "authtourismappe1d5f126"
-      },
-      "lastPushTimeStamp": "2025-05-14T21:43:13.148Z",
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
       "output": {
         "UserPoolId": "us-east-2_PD2qEfO7c",
         "AppClientIDWeb": "526dpjqsi94bodc5aqsmqb87fs",
@@ -52,7 +47,11 @@
         "IdentityPoolName": "tourismappe1d5f126_identitypool_e1d5f126__dev",
         "UserPoolName": "tourismappe1d5f126_userpool_e1d5f126"
       },
-      "lastPushDirHash": "njkLeY2zQpWy+SOHCoUbwp9xBaI="
+      "lastPushTimeStamp": "2025-05-19T07:48:40.774Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tourismapp-dev-0ee3e-deployment/amplify-cfn-templates/auth/tourismappe1d5f126-cloudformation-template.json",
+        "logicalId": "authtourismappe1d5f126"
+      }
     }
   }
 }
