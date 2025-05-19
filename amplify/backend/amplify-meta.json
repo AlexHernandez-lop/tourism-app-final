@@ -1,0 +1,58 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tourismapp-dev-0ee3e-authRole",
+      "UnauthRoleArn": "arn:aws:iam::285876165557:role/amplify-tourismapp-dev-0ee3e-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::285876165557:role/amplify-tourismapp-dev-0ee3e-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-tourismapp-dev-0ee3e-deployment",
+      "UnauthRoleName": "amplify-tourismapp-dev-0ee3e-unauthRole",
+      "StackName": "amplify-tourismapp-dev-0ee3e",
+      "StackId": "arn:aws:cloudformation:us-east-2:285876165557:stack/amplify-tourismapp-dev-0ee3e/ddeec760-310b-11f0-84fc-06277ce604a3",
+      "AmplifyAppId": "d26imnyrpg4ywt"
+    }
+  },
+  "auth": {
+    "tourismappe1d5f126": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tourismapp-dev-0ee3e-deployment/amplify-cfn-templates/auth/tourismappe1d5f126-cloudformation-template.json",
+        "logicalId": "authtourismappe1d5f126"
+      },
+      "lastPushTimeStamp": "2025-05-14T21:43:13.148Z",
+      "output": {
+        "UserPoolId": "us-east-2_PD2qEfO7c",
+        "AppClientIDWeb": "526dpjqsi94bodc5aqsmqb87fs",
+        "AppClientID": "7o4rhpb8h0gr56srk6bo02se3a",
+        "IdentityPoolId": "us-east-2:e490b294-2b3b-4871-9193-d9d3cec441ea",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:285876165557:userpool/us-east-2_PD2qEfO7c",
+        "IdentityPoolName": "tourismappe1d5f126_identitypool_e1d5f126__dev",
+        "UserPoolName": "tourismappe1d5f126_userpool_e1d5f126"
+      },
+      "lastPushDirHash": "njkLeY2zQpWy+SOHCoUbwp9xBaI="
+    }
+  }
+}
