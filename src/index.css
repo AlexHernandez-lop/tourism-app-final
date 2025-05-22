@@ -127,3 +127,17 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.3333%);
+  }
+}
+
+.carousel-track {
+  width: 300%; /* Porque tenemos 3 veces las imágenes */
+  animation: scrollLeft 30s linear infinite;
+}

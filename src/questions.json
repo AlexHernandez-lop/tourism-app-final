@@ -1,0 +1,52 @@
+[
+  {
+    "pregunta": "¿Qué tipo de actividad disfrutas más durante las vacaciones?",
+    "opciones": [
+      { "texto": "Explorar ruinas antiguas", "categoria": "Tour arqueológico" },
+      { "texto": "Hacer esnórquel en aguas cristalinas", "categoria": "Esnórquel en bahías" },
+      { "texto": "Observar aves en su hábitat", "categoria": "Observación de aves migratorias" },
+      { "texto": "Hacer senderismo por la naturaleza", "categoria": "Caminata en senderos naturales" },
+      { "texto": "Nadar en una playa aislada", "categoria": "Nadar en playas o piscinas naturales" }
+    ]
+  },
+  {
+    "pregunta": "¿Cuál de estas actividades suena más emocionante?",
+    "opciones": [
+      { "texto": "Bucear entre arrecifes", "categoria": "Buceo en arrecifes" },
+      { "texto": "Remar en kayak", "categoria": "Excursión en kayak" },
+      { "texto": "Ir de campamento bajo las estrellas", "categoria": "Camping en la montaña" },
+      { "texto": "Montar bicicleta por senderos", "categoria": "Paseo en bicicleta de montaña" },
+      { "texto": "Navegar en lancha a gran velocidad", "categoria": "Paseo en lancha rápida" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué prefieres hacer en una excursión de un día?",
+    "opciones": [
+      { "texto": "Visitar templos antiguos", "categoria": "Tour de templos y monumentos" },
+      { "texto": "Caminar por jardines botánicos", "categoria": "Tour de jardines botánicos" },
+      { "texto": "Observar estrellas en la noche", "categoria": "Observación de estrellas" },
+      { "texto": "Vivir una experiencia cultural auténtica", "categoria": "Experiencia cultural indígena" },
+      { "texto": "Realizar un tour guiado por un guía local", "categoria": "Tour guiado" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué te relaja más en la naturaleza?",
+    "opciones": [
+      { "texto": "Caminar por un sendero natural", "categoria": "Caminata en senderos naturales" },
+      { "texto": "Ver fauna silvestre en su hábitat", "categoria": "Avistamiento de fauna silvestre" },
+      { "texto": "Nadar en una piscina natural", "categoria": "Nadar en playas o piscinas naturales" },
+      { "texto": "Observar aves al amanecer", "categoria": "Observación de aves migratorias" },
+      { "texto": "Contemplar el cielo estrellado", "categoria": "Observación de estrellas" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué te gustaría probar por primera vez?",
+    "opciones": [
+      { "texto": "Hacer buceo en arrecifes", "categoria": "Buceo en arrecifes" },
+      { "texto": "Participar en un ritual indígena", "categoria": "Experiencia cultural indígena" },
+      { "texto": "Acampar en una montaña", "categoria": "Camping en la montaña" },
+      { "texto": "Explorar un jardín botánico", "categoria": "Tour de jardines botánicos" },
+      { "texto": "Hacer un tour en bicicleta", "categoria": "Paseo en bicicleta de montaña" }
+    ]
+  }
+]
