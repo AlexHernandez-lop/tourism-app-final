@@ -130,7 +130,6 @@ export function ProviderProfile() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold text-gray-900">Perfil del Proveedor</h1>
-            <p className="text-gray-600">Usuario: {user.username}</p>
           </div>
           <button
             onClick={() => navigate('/agregar-servicio')}
