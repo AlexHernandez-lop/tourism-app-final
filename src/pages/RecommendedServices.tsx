@@ -109,7 +109,7 @@ export function RecommendedServices() {
   // Obtener las 3 categorías con mayor valor en preferencias
   const top3Categorias = Object.entries(preferences)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 4)
+    .slice(0, 3)
     .map(([categoria]) => categoria);
 
   // Mapear las categorías de servicios a preferencia y filtrar
