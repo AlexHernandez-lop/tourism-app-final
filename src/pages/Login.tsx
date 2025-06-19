@@ -43,7 +43,7 @@ export function Login() {
 
         {/* Formulario del lado derecho */}
         <div className="w-full md:w-1/2 p-8 relative">
-          <h2 className="text-2xl font-bold mb-1">Regístrate como proveedor</h2>
+          <h2 className="text-2xl font-bold mb-1">Inicia Sesión o Regístrate</h2>
           <p className="mb-6 text-gray-600">Y expande el turismo sustentable</p>
 
           <Authenticator

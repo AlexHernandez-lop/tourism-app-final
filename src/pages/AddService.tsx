@@ -7,13 +7,13 @@ const API_UPLOAD_URL = "https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/d
 
 const TIPOS_DE_ACTIVIDAD = [
   'Tour guiado',
-  'Caminata en senderos naturales',
-  'Buceo en arrecifes',
-  'Esnórquel en bahías',
-  'Nadar en playas o piscinas naturales',
+  'Caminata en senderos',
+  'Buceo',
+  'Cascadas',
   'Paseo en lancha rápida',
+  'Snorkel',
   'Observación de aves migratorias',
-  'Experiencia cultural indígena',
+  'Experiencia cultural',
   'Excursión en kayak',
   'Camping en la montaña',
   'Avistamiento de fauna silvestre',
@@ -22,6 +22,7 @@ const TIPOS_DE_ACTIVIDAD = [
   'Tour de jardines botánicos',
   'Tour de templos y monumentos',
   'Observación de estrellas',
+  'Piscinas naturales, cenotes',
 ];
 
 

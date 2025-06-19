@@ -3,16 +3,16 @@
     "pregunta": "¿Qué tipo de actividad disfrutas más durante las vacaciones?",
     "opciones": [
       { "texto": "Explorar ruinas antiguas", "categoria": "Tour arqueológico" },
-      { "texto": "Hacer esnórquel en aguas cristalinas", "categoria": "Esnórquel en bahías" },
+      { "texto": "Hacer esnórquel en aguas cristalinas", "categoria": "Buceo" },
       { "texto": "Observar aves en su hábitat", "categoria": "Observación de aves migratorias" },
-      { "texto": "Hacer senderismo por la naturaleza", "categoria": "Caminata en senderos naturales" },
-      { "texto": "Nadar en una playa aislada", "categoria": "Nadar en playas o piscinas naturales" }
+      { "texto": "Hacer senderismo por la naturaleza", "categoria": "Caminata en senderos" },
+      { "texto": "Nadar en una playa aislada", "categoria": "Cascadas" }
     ]
   },
   {
     "pregunta": "¿Cuál de estas actividades suena más emocionante?",
     "opciones": [
-      { "texto": "Bucear entre arrecifes", "categoria": "Buceo en arrecifes" },
+      { "texto": "Bucear entre arrecifes", "categoria": "Buceo" },
       { "texto": "Remar en kayak", "categoria": "Excursión en kayak" },
       { "texto": "Ir de campamento bajo las estrellas", "categoria": "Camping en la montaña" },
       { "texto": "Montar bicicleta por senderos", "categoria": "Paseo en bicicleta de montaña" },
@@ -25,16 +25,16 @@
       { "texto": "Visitar templos antiguos", "categoria": "Tour de templos y monumentos" },
       { "texto": "Caminar por jardines botánicos", "categoria": "Tour de jardines botánicos" },
       { "texto": "Observar estrellas en la noche", "categoria": "Observación de estrellas" },
-      { "texto": "Vivir una experiencia cultural auténtica", "categoria": "Experiencia cultural indígena" },
+      { "texto": "Vivir una experiencia cultural auténtica", "categoria": "Experiencia cultural" },
       { "texto": "Realizar un tour guiado por un guía local", "categoria": "Tour guiado" }
     ]
   },
   {
     "pregunta": "¿Qué te relaja más en la naturaleza?",
     "opciones": [
-      { "texto": "Caminar por un sendero natural", "categoria": "Caminata en senderos naturales" },
+      { "texto": "Caminar por un sendero natural", "categoria": "Caminata en senderos" },
       { "texto": "Ver fauna silvestre en su hábitat", "categoria": "Avistamiento de fauna silvestre" },
-      { "texto": "Nadar en una piscina natural", "categoria": "Nadar en playas o piscinas naturales" },
+      { "texto": "Nadar en una piscina natural", "categoria": "Cascadas" },
       { "texto": "Observar aves al amanecer", "categoria": "Observación de aves migratorias" },
       { "texto": "Contemplar el cielo estrellado", "categoria": "Observación de estrellas" }
     ]
@@ -42,11 +42,104 @@
   {
     "pregunta": "¿Qué te gustaría probar por primera vez?",
     "opciones": [
-      { "texto": "Hacer buceo en arrecifes", "categoria": "Buceo en arrecifes" },
-      { "texto": "Participar en un ritual indígena", "categoria": "Experiencia cultural indígena" },
+      { "texto": "Hacer buceo en arrecifes", "categoria": "Buceo" },
+      { "texto": "Participar en un ritual indígena", "categoria": "Experiencia cultural" },
       { "texto": "Acampar en una montaña", "categoria": "Camping en la montaña" },
       { "texto": "Explorar un jardín botánico", "categoria": "Tour de jardines botánicos" },
       { "texto": "Hacer un tour en bicicleta", "categoria": "Paseo en bicicleta de montaña" }
     ]
+  },
+  
+  {
+    "pregunta": "¿Qué actividad elegirías para un día tranquilo al aire libre?",
+    "opciones": [
+      { "texto": "Caminar entre árboles", "categoria": "Caminata en senderos" },
+      { "texto": "Sentarte junto a una cascada", "categoria": "Cascadas" },
+      { "texto": "Observar aves con binoculares", "categoria": "Observación de aves migratorias" },
+      { "texto": "Leer bajo las estrellas", "categoria": "Observación de estrellas" }
+    ]
+  },
+  {
+    "pregunta": "¿Cuál de estas experiencias culturales te interesa más?",
+    "opciones": [
+      { "texto": "Recorrer ruinas antiguas", "categoria": "Tour arqueológico" },
+      { "texto": "Explorar templos y monumentos", "categoria": "Tour de templos y monumentos" },
+      { "texto": "Visitar un mercado tradicional", "categoria": "Experiencia cultural" },
+      { "texto": "Realizar un tour guiado por un pueblo histórico", "categoria": "Tour guiado" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué prefieres hacer durante una aventura acuática?",
+    "opciones": [
+      { "texto": "Bucear en arrecifes", "categoria": "Buceo" },
+      { "texto": "Remar en kayak por un río", "categoria": "Excursión en kayak" },
+      { "texto": "Navegar en una lancha rápida", "categoria": "Paseo en lancha rápida" },
+      { "texto": "Nadar cerca de una cascada", "categoria": "Cascadas" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué tipo de contacto con la naturaleza prefieres?",
+    "opciones": [
+      { "texto": "Observar animales silvestres", "categoria": "Avistamiento de fauna silvestre" },
+      { "texto": "Caminar por la montaña", "categoria": "Caminata en senderos" },
+      { "texto": "Montar bicicleta en caminos rurales", "categoria": "Paseo en bicicleta de montaña" },
+      { "texto": "Acampar bajo los árboles", "categoria": "Camping en la montaña" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué actividad harías con amigos en la naturaleza?",
+    "opciones": [
+      { "texto": "Excursión en grupo con guía", "categoria": "Tour guiado" },
+      { "texto": "Viaje en lancha por el río", "categoria": "Paseo en lancha rápida" },
+      { "texto": "Bicicleta por senderos", "categoria": "Paseo en bicicleta de montaña" },
+      { "texto": "Camping en la montaña", "categoria": "Camping en la montaña" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué paisaje natural prefieres contemplar?",
+    "opciones": [
+      { "texto": "Una cascada en la selva", "categoria": "Cascadas" },
+      { "texto": "El cielo estrellado en el desierto", "categoria": "Observación de estrellas" },
+      { "texto": "Aves migratorias en lagunas", "categoria": "Observación de aves migratorias" },
+      { "texto": "Fauna silvestre en su entorno", "categoria": "Avistamiento de fauna silvestre" }
+    ]
+  },
+  {
+    "pregunta": "¿Cuál de estas actividades es tu forma favorita de explorar?",
+    "opciones": [
+      { "texto": "A pie, recorriendo senderos", "categoria": "Caminata en senderos" },
+      { "texto": "En bicicleta por la montaña", "categoria": "Paseo en bicicleta de montaña" },
+      { "texto": "Con guía local", "categoria": "Tour guiado" },
+      { "texto": "Navegando en kayak", "categoria": "Excursión en kayak" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué te gustaría aprender en un viaje?",
+    "opciones": [
+      { "texto": "Historia de civilizaciones antiguas", "categoria": "Tour arqueológico" },
+      { "texto": "Tradiciones y costumbres locales", "categoria": "Experiencia cultural" },
+      { "texto": "Diversidad de flora en jardines", "categoria": "Tour de jardines botánicos" },
+      { "texto": "Astronomía y estrellas", "categoria": "Observación de estrellas" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué prefieres para una escapada corta?",
+    "opciones": [
+      { "texto": "Un paseo cultural por la ciudad", "categoria": "Tour guiado" },
+      { "texto": "Un recorrido natural en bicicleta", "categoria": "Paseo en bicicleta de montaña" },
+      { "texto": "Una noche de camping", "categoria": "Camping en la montaña" },
+      { "texto": "Una excursión para observar aves", "categoria": "Observación de aves migratorias" }
+    ]
+  },
+  {
+    "pregunta": "¿Qué tipo de tour elegirías en tus próximas vacaciones?",
+    "opciones": [
+      { "texto": "Tour arqueológico", "categoria": "Tour arqueológico" },
+      { "texto": "Tour de jardines botánicos", "categoria": "Tour de jardines botánicos" },
+      { "texto": "Tour de templos y monumentos", "categoria": "Tour de templos y monumentos" },
+      { "texto": "Tour guiado en bicicleta", "categoria": "Paseo en bicicleta de montaña" }
+    ]
   }
+
+
 ]
