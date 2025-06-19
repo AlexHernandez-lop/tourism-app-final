@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { fetchAuthSession } from 'aws-amplify/auth';
 import '@aws-amplify/ui-react/styles.css';
@@ -11,10 +11,8 @@ export function Login() {
   const checkUserGroup = async () => {
     try {
       const { tokens } = await fetchAuthSession();
-      // Aseguramos el tipo como array de strings
       const groups = (tokens?.accessToken?.payload["cognito:groups"] as string[]) || [];
-      
-      // Redirigir según el grupo
+
       if (groups.includes("Proveedores")) {
         navigate('/provider-profile');
       } else if (groups.includes("Turistas")) {
@@ -24,7 +22,6 @@ export function Login() {
       }
     } catch (error) {
       console.error("Error al verificar grupos del usuario:", error);
-      // Opcional: mostrar mensaje de error al usuario
     }
   };
 
@@ -50,6 +47,30 @@ export function Login() {
             className="custom-auth"
             hideSignUp={false}
             loginMechanisms={['email']}
+            signUpAttributes={['email']}
+            components={{
+              SignUp: {
+                FormFields() {
+                  return (
+                    <>
+                      <Authenticator.SignUp.FormFields />
+                      <div className="amplify-field">
+                        <label htmlFor="custom:grupo" className="amplify-label">Tipo de usuario</label>
+                        <select
+                          name="custom:grupo"
+                          required
+                          className="amplify-input"
+                        >
+                          <option value="">Selecciona una opción</option>
+                          <option value="Turistas">Turista</option>
+                          <option value="Proveedores">Proveedor</option>
+                        </select>
+                      </div>
+                    </>
+                  );
+                }
+              }
+            }}
           >
             {({ user }) => {
               if (user) {
@@ -58,7 +79,7 @@ export function Login() {
               return <></>;
             }}
           </Authenticator>
-          
+
         </div>
       </div>
     </div>
