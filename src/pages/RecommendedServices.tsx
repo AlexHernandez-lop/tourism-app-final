@@ -3,9 +3,10 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Link, useNavigate } from "react-router-dom";
 
 type Servicio = {
+  ServiceID: string;
   titulo: string;
   descripcion: string;
-  tipoActividad: string; // Este es el nombre que mapeamos a preferencia
+  tipoActividad: string;
   ubicacion: string;
   precio: number;
   imagenes: string[];
@@ -17,7 +18,7 @@ const categoriaMap: { [key: string]: string } = {
   "Buceo": "buceo",
   "Cascadas": "cascadas",
   "Paseo en lancha rápida": "lancha",
-  "Snorkel" : "snorkel",
+  "Snorkel": "snorkel",
   "Observación de aves migratorias": "aves",
   "Experiencia cultural": "cultura",
   "Excursión en kayak": "kayak",
@@ -40,7 +41,6 @@ export function RecommendedServices() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Cargar servicios
   useEffect(() => {
     fetch("https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/getallservices")
       .then((res) => res.json())
@@ -55,10 +55,9 @@ export function RecommendedServices() {
       });
   }, []);
 
-  // Cargar preferencias del usuario en sesión
   useEffect(() => {
     if (!user) {
-      navigate("/login"); // o donde tengas la ruta para login
+      navigate("/login");
       return;
     }
     setLoading(true);
@@ -66,7 +65,6 @@ export function RecommendedServices() {
       .then((res) => res.json())
       .then((data) => {
         if (data.preferences) {
-          // Quitamos campos no numéricos o irrelevantes para preferencias
           const prefs = { ...data.preferences };
           delete prefs.timestamp;
           delete prefs.TouristID;
@@ -106,13 +104,11 @@ export function RecommendedServices() {
     );
   }
 
-  // Obtener las 3 categorías con mayor valor en preferencias
   const top3Categorias = Object.entries(preferences)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 4)
     .map(([categoria]) => categoria);
 
-  // Mapear las categorías de servicios a preferencia y filtrar
   const filteredServices = services.filter((servicio) => {
     const clavePref = categoriaMap[servicio.tipoActividad];
     return clavePref && top3Categorias.includes(clavePref);
@@ -128,8 +124,8 @@ export function RecommendedServices() {
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map((servicio, i) => (
-            <Link to={`/service/${i}`} key={i}>
+          {filteredServices.map((servicio) => (
+            <Link to={`/service/${servicio.ServiceID}`} key={servicio.ServiceID}>
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition duration-300 ease-in-out cursor-pointer">
                 <img
                   src={servicio.imagenes[0]}

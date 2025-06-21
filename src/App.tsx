@@ -177,7 +177,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/provider/service/:index" element={<ProviderServiceDetail />} />
-          <Route path="/service/:index" element={<ServiceDetail />} />
+          <Route path="/service/:id" element={<ServiceDetail />} />
           <Route path="/editar-servicio/:index" element={<EditarServicio />} />
           <Route 
             path="/agregar-servicio" 

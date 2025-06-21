@@ -4,19 +4,19 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { fetchAuthSession } from "aws-amplify/auth";
 
 type Servicio = {
+  ServiceID: string;
+  providerId: string;
   titulo: string;
   descripcion: string;
   tipoActividad: string;
   ubicacion: string;
   precio: number;
   imagenes: string[];
-  serviceId: string;
-  providerId: string;
 };
 
 export function ServiceDetail() {
   const { user } = useAuthenticator((context) => [context.user]);
-  const { index } = useParams();
+  const { id } = useParams(); // <--- ID del servicio
   const navigate = useNavigate();
 
   const [servicio, setServicio] = useState<Servicio | null>(null);
@@ -27,11 +27,9 @@ export function ServiceDetail() {
   const [fechaReserva, setFechaReserva] = useState("");
   const [mensaje, setMensaje] = useState("");
 
-  // Estado para grupo de usuario
   const [userGroup, setUserGroup] = useState<string | null>(null);
   const [loadingGroup, setLoadingGroup] = useState(true);
 
-  // Obtener grupo de usuario (Turistas / Proveedores)
   useEffect(() => {
     const checkUserGroup = async () => {
       if (user) {
@@ -61,25 +59,18 @@ export function ServiceDetail() {
   }, [user]);
 
   useEffect(() => {
-    fetch("https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/getallservices")
+    if (!id) return;
+
+    fetch(`https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/getservicebyid?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        const servicios = data.servicios || [];
-        const servicioRaw = servicios[Number(index)];
-        if (!servicioRaw) return;
-
-        const servicioConvertido = {
-          ...servicioRaw,
-          serviceId: servicioRaw.ServiceID,
-        };
-
-        console.log("Servicio cargado:", servicioConvertido);
-        setServicio(servicioConvertido);
+        const parsed = typeof data.body === "string" ? JSON.parse(data.body) : data.body;
+        setServicio(parsed);
       })
       .catch((err) => {
         console.error("Error al cargar servicio:", err);
       });
-  }, [index]);
+  }, [id]);
 
   const enviarReserva = async () => {
     if (!servicio || !user) {
@@ -88,31 +79,26 @@ export function ServiceDetail() {
     }
 
     const datosReserva = {
-      serviceId: servicio.serviceId,
+      serviceId: servicio.ServiceID,
       providerId: servicio.providerId,
       numPersonas,
       fechaReserva,
       nombreCliente,
       emailCliente,
-      TouristID: user.username // 👈 aquí se agrega el TouristID desde el usuario autenticado
+      TouristID: user.username
     };
-
-    console.log("Datos a enviar:", datosReserva);
 
     try {
       const res = await fetch(
         "https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/reservations",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(datosReserva),
         }
       );
 
       const result = await res.json();
-      console.log("Respuesta backend:", result);
 
       if (res.status === 201) {
         setMensaje("✅ Reservación exitosa");
@@ -131,10 +117,7 @@ export function ServiceDetail() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <button
-        onClick={() => navigate("/")}
-        className="mb-6 flex items-center text-blue-600 hover:underline"
-      >
+      <button onClick={() => navigate("/")} className="mb-6 flex items-center text-blue-600 hover:underline">
         ← Regresar
       </button>
 
@@ -147,16 +130,10 @@ export function ServiceDetail() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {servicio.imagenes.map((img, i) => (
-          <img
-            key={i}
-            src={img}
-            alt={`Imagen ${i + 1}`}
-            className="w-full h-64 object-cover rounded-lg shadow"
-          />
+          <img key={i} src={img} alt={`Imagen ${i + 1}`} className="w-full h-64 object-cover rounded-lg shadow" />
         ))}
       </div>
 
-      {/* Mostrar botón y formulario solo si usuario es Turista */}
       {!loadingGroup && userGroup === "Turistas" && (
         <>
           <button
@@ -171,73 +148,18 @@ export function ServiceDetail() {
               <h2 className="text-xl font-semibold mb-4">Datos de la reserva</h2>
 
               <div className="grid gap-6">
-                <div>
-                  <label className="block font-medium mb-1" htmlFor="nombreCliente">
-                    Nombre completo
-                  </label>
-                  <input
-                    id="nombreCliente"
-                    type="text"
-                    placeholder="Nombre completo"
-                    className="p-2 border rounded w-full"
-                    value={nombreCliente}
-                    onChange={(e) => setNombreCliente(e.target.value)}
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Escribe tu nombre completo para la reserva.
-                  </p>
-                </div>
+                <input type="text" className="p-2 border rounded w-full" placeholder="Nombre completo"
+                  value={nombreCliente} onChange={(e) => setNombreCliente(e.target.value)} />
 
-                <div>
-                  <label className="block font-medium mb-1" htmlFor="emailCliente">
-                    Correo electrónico
-                  </label>
-                  <input
-                    id="emailCliente"
-                    type="email"
-                    placeholder="Correo electrónico"
-                    className="p-2 border rounded w-full"
-                    value={emailCliente}
-                    onChange={(e) => setEmailCliente(e.target.value)}
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Escribe un correo electrónico para compartir información de la reserva.
-                  </p>
-                </div>
+                <input type="email" className="p-2 border rounded w-full" placeholder="Correo electrónico"
+                  value={emailCliente} onChange={(e) => setEmailCliente(e.target.value)} />
 
-                <div>
-                  <label className="block font-medium mb-1" htmlFor="numPersonas">
-                    Número de personas
-                  </label>
-                  <input
-                    id="numPersonas"
-                    type="number"
-                    min={1}
-                    placeholder="Número de personas"
-                    className="p-2 border rounded w-full"
-                    value={numPersonas}
-                    onChange={(e) => setNumPersonas(Number(e.target.value))}
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Indica cuántas personas participarán en la actividad.
-                  </p>
-                </div>
+                <input type="number" className="p-2 border rounded w-full" min={1}
+                  placeholder="Número de personas" value={numPersonas}
+                  onChange={(e) => setNumPersonas(Number(e.target.value))} />
 
-                <div>
-                  <label className="block font-medium mb-1" htmlFor="fechaReserva">
-                    Fecha y hora de la reserva
-                  </label>
-                  <input
-                    id="fechaReserva"
-                    type="datetime-local"
-                    className="p-2 border rounded w-full"
-                    value={fechaReserva}
-                    onChange={(e) => setFechaReserva(e.target.value)}
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Selecciona la fecha y hora en que deseas realizar la actividad.
-                  </p>
-                </div>
+                <input type="datetime-local" className="p-2 border rounded w-full"
+                  value={fechaReserva} onChange={(e) => setFechaReserva(e.target.value)} />
 
                 <button
                   onClick={enviarReserva}
