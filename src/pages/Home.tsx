@@ -8,6 +8,7 @@ const images = [
 ];
 
 type Servicio = {
+  ServiceID: string;   // <-- Agregado para el ID único
   titulo: string;
   descripcion: string;
   tipoActividad: string;
@@ -88,18 +89,18 @@ export function Home() {
         </div>
       </div>
 
-    {/* Buscador limpio y uniforme */}
-<div className="relative z-10 flex items-center justify-center mt-10 px-4">
-  <div className="w-full max-w-2xl">
-    <input
-      type="text"
-      placeholder="Buscar por descripción"
-      className="w-full px-5 py-3 rounded-xl border border-red-300 focus:border-2 focus:border-red-600 hover:border-red-500 outline-none transition-all duration-300 text-gray-700"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-  </div>
-</div>
+      {/* Buscador limpio y uniforme */}
+      <div className="relative z-10 flex items-center justify-center mt-10 px-4">
+        <div className="w-full max-w-2xl">
+          <input
+            type="text"
+            placeholder="Buscar por descripción"
+            className="w-full px-5 py-3 rounded-xl border border-red-300 focus:border-2 focus:border-red-600 hover:border-red-500 outline-none transition-all duration-300 text-gray-700"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
 
       {/* Servicios cargados */}
       <div className="w-full mt-10 px-6 md:px-12">
@@ -108,21 +109,21 @@ export function Home() {
           <p className="text-center text-gray-500">No se encontraron servicios.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((servicio, index) => (
-              <Link to={`/service/${index}`} key={index}>
-              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition duration-300 ease-in-out">
-                <img
-                  src={servicio.imagenes[0]}
-                  alt={servicio.titulo}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-800">{servicio.titulo}</h3>
-                  <p className="text-gray-600 mt-1">{servicio.tipoActividad}</p>
-                  <p className="text-green-700 font-bold mt-2">${servicio.precio} MXN</p>
-                  <p className="text-sm text-gray-500 mt-1">{servicio.ubicacion}</p>
+            {filteredServices.map((servicio) => (
+              <Link to={`/service/${servicio.ServiceID}`} key={servicio.ServiceID}>
+                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition duration-300 ease-in-out cursor-pointer">
+                  <img
+                    src={servicio.imagenes[0]}
+                    alt={servicio.titulo}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-xl font-semibold text-gray-800">{servicio.titulo}</h3>
+                    <p className="text-gray-600 mt-1">{servicio.tipoActividad}</p>
+                    <p className="text-green-700 font-bold mt-2">${servicio.precio} MXN</p>
+                    <p className="text-sm text-gray-500 mt-1">{servicio.ubicacion}</p>
+                  </div>
                 </div>
-              </div>
               </Link>
             ))}
           </div>

@@ -16,7 +16,7 @@ type Servicio = {
 
 export function ServiceDetail() {
   const { user } = useAuthenticator((context) => [context.user]);
-  const { id } = useParams(); // <--- ID del servicio
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [servicio, setServicio] = useState<Servicio | null>(null);
@@ -60,12 +60,10 @@ export function ServiceDetail() {
 
   useEffect(() => {
     if (!id) return;
-
-    fetch(`https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/getservicebyid?id=${id}`)
+    fetch(`https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/service/get-by-id?ServiceID=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        const parsed = typeof data.body === "string" ? JSON.parse(data.body) : data.body;
-        setServicio(parsed);
+        setServicio(data.servicio);
       })
       .catch((err) => {
         console.error("Error al cargar servicio:", err);
@@ -85,7 +83,7 @@ export function ServiceDetail() {
       fechaReserva,
       nombreCliente,
       emailCliente,
-      TouristID: user.username
+      TouristID: user.username,
     };
 
     try {
@@ -93,13 +91,14 @@ export function ServiceDetail() {
         "https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/reservations",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(datosReserva),
         }
       );
 
       const result = await res.json();
-
       if (res.status === 201) {
         setMensaje("✅ Reservación exitosa");
         setMostrarFormulario(false);
@@ -117,7 +116,10 @@ export function ServiceDetail() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <button onClick={() => navigate("/")} className="mb-6 flex items-center text-blue-600 hover:underline">
+      <button
+        onClick={() => navigate("/")}
+        className="mb-6 flex items-center text-blue-600 hover:underline"
+      >
         ← Regresar
       </button>
 
@@ -130,7 +132,12 @@ export function ServiceDetail() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {servicio.imagenes.map((img, i) => (
-          <img key={i} src={img} alt={`Imagen ${i + 1}`} className="w-full h-64 object-cover rounded-lg shadow" />
+          <img
+            key={i}
+            src={img}
+            alt={`Imagen ${i + 1}`}
+            className="w-full h-64 object-cover rounded-lg shadow"
+          />
         ))}
       </div>
 
@@ -146,20 +153,47 @@ export function ServiceDetail() {
           {mostrarFormulario && (
             <div className="mt-6 border rounded-lg p-4 bg-gray-50">
               <h2 className="text-xl font-semibold mb-4">Datos de la reserva</h2>
-
               <div className="grid gap-6">
-                <input type="text" className="p-2 border rounded w-full" placeholder="Nombre completo"
-                  value={nombreCliente} onChange={(e) => setNombreCliente(e.target.value)} />
+                <div>
+                  <label className="block font-medium mb-1">Nombre completo</label>
+                  <input
+                    type="text"
+                    className="p-2 border rounded w-full"
+                    value={nombreCliente}
+                    onChange={(e) => setNombreCliente(e.target.value)}
+                  />
+                </div>
 
-                <input type="email" className="p-2 border rounded w-full" placeholder="Correo electrónico"
-                  value={emailCliente} onChange={(e) => setEmailCliente(e.target.value)} />
+                <div>
+                  <label className="block font-medium mb-1">Correo electrónico</label>
+                  <input
+                    type="email"
+                    className="p-2 border rounded w-full"
+                    value={emailCliente}
+                    onChange={(e) => setEmailCliente(e.target.value)}
+                  />
+                </div>
 
-                <input type="number" className="p-2 border rounded w-full" min={1}
-                  placeholder="Número de personas" value={numPersonas}
-                  onChange={(e) => setNumPersonas(Number(e.target.value))} />
+                <div>
+                  <label className="block font-medium mb-1">Número de personas</label>
+                  <input
+                    type="number"
+                    min={1}
+                    className="p-2 border rounded w-full"
+                    value={numPersonas}
+                    onChange={(e) => setNumPersonas(Number(e.target.value))}
+                  />
+                </div>
 
-                <input type="datetime-local" className="p-2 border rounded w-full"
-                  value={fechaReserva} onChange={(e) => setFechaReserva(e.target.value)} />
+                <div>
+                  <label className="block font-medium mb-1">Fecha y hora</label>
+                  <input
+                    type="datetime-local"
+                    className="p-2 border rounded w-full"
+                    value={fechaReserva}
+                    onChange={(e) => setFechaReserva(e.target.value)}
+                  />
+                </div>
 
                 <button
                   onClick={enviarReserva}

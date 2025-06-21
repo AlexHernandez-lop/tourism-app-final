@@ -64,14 +64,10 @@ export function RecommendedServices() {
     fetch(`https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/add_preferences?TouristID=${user.username}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.preferences) {
-          const prefs = { ...data.preferences };
-          delete prefs.timestamp;
-          delete prefs.TouristID;
-          setPreferences(prefs);
-        } else {
-          setPreferences({});
-        }
+        const prefs = { ...data.preferences };
+        delete prefs.timestamp;
+        delete prefs.TouristID;
+        setPreferences(prefs);
       })
       .catch((err) => {
         console.error("Error al cargar preferencias:", err);
@@ -81,27 +77,15 @@ export function RecommendedServices() {
   }, [user, navigate]);
 
   if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-700">Usuario no autenticado, redirigiendo...</p>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center"><p>Usuario no autenticado, redirigiendo...</p></div>;
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-700">Cargando...</p>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center"><p>Cargando...</p></div>;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600">{error}</p>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center"><p className="text-red-600">{error}</p></div>;
   }
 
   const top3Categorias = Object.entries(preferences)
@@ -117,7 +101,6 @@ export function RecommendedServices() {
   return (
     <div className="w-full min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-center mb-8">Servicios recomendados para ti</h1>
-
       {filteredServices.length === 0 ? (
         <p className="text-center text-gray-600">
           No se encontraron servicios para tus preferencias actuales.
