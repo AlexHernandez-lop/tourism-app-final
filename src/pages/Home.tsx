@@ -110,7 +110,10 @@ export function Home() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredServices.map((servicio) => (
-              <Link to={`/service/${servicio.ServiceID}`} key={servicio.ServiceID}>
+              <Link to={`/service/${servicio.ServiceID}`} 
+              state={{ from: location.pathname }}
+              key={servicio.ServiceID}>
+
                 <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition duration-300 ease-in-out cursor-pointer">
                   <img
                     src={servicio.imagenes[0]}

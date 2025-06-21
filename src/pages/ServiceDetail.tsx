@@ -1,23 +1,25 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { fetchAuthSession } from "aws-amplify/auth";
 
 type Servicio = {
-  ServiceID: string;
-  providerId: string;
   titulo: string;
   descripcion: string;
   tipoActividad: string;
   ubicacion: string;
   precio: number;
   imagenes: string[];
+  serviceId: string;
+  providerId: string;
 };
 
 export function ServiceDetail() {
   const { user } = useAuthenticator((context) => [context.user]);
-  const { id } = useParams();
+  const { id } = useParams(); // Cambiado de index a id
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/"; // Ruta previa o "/" por defecto
 
   const [servicio, setServicio] = useState<Servicio | null>(null);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -63,7 +65,15 @@ export function ServiceDetail() {
     fetch(`https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/service/get-by-id?ServiceID=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setServicio(data.servicio);
+        const servicioRaw = data.servicio;
+        if (!servicioRaw) return;
+
+        const servicioConvertido = {
+          ...servicioRaw,
+          serviceId: servicioRaw.ServiceID,
+        };
+
+        setServicio(servicioConvertido);
       })
       .catch((err) => {
         console.error("Error al cargar servicio:", err);
@@ -77,7 +87,7 @@ export function ServiceDetail() {
     }
 
     const datosReserva = {
-      serviceId: servicio.ServiceID,
+      serviceId: servicio.serviceId,
       providerId: servicio.providerId,
       numPersonas,
       fechaReserva,
@@ -91,14 +101,13 @@ export function ServiceDetail() {
         "https://ac57fn0hv8.execute-api.us-east-2.amazonaws.com/dev/reservations",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(datosReserva),
         }
       );
 
       const result = await res.json();
+
       if (res.status === 201) {
         setMensaje("✅ Reservación exitosa");
         setMostrarFormulario(false);
@@ -117,7 +126,7 @@ export function ServiceDetail() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate(from)}
         className="mb-6 flex items-center text-blue-600 hover:underline"
       >
         ← Regresar
@@ -153,10 +162,14 @@ export function ServiceDetail() {
           {mostrarFormulario && (
             <div className="mt-6 border rounded-lg p-4 bg-gray-50">
               <h2 className="text-xl font-semibold mb-4">Datos de la reserva</h2>
+
               <div className="grid gap-6">
                 <div>
-                  <label className="block font-medium mb-1">Nombre completo</label>
+                  <label className="block font-medium mb-1" htmlFor="nombreCliente">
+                    Nombre completo
+                  </label>
                   <input
+                    id="nombreCliente"
                     type="text"
                     className="p-2 border rounded w-full"
                     value={nombreCliente}
@@ -165,8 +178,11 @@ export function ServiceDetail() {
                 </div>
 
                 <div>
-                  <label className="block font-medium mb-1">Correo electrónico</label>
+                  <label className="block font-medium mb-1" htmlFor="emailCliente">
+                    Correo electrónico
+                  </label>
                   <input
+                    id="emailCliente"
                     type="email"
                     className="p-2 border rounded w-full"
                     value={emailCliente}
@@ -175,8 +191,11 @@ export function ServiceDetail() {
                 </div>
 
                 <div>
-                  <label className="block font-medium mb-1">Número de personas</label>
+                  <label className="block font-medium mb-1" htmlFor="numPersonas">
+                    Número de personas
+                  </label>
                   <input
+                    id="numPersonas"
                     type="number"
                     min={1}
                     className="p-2 border rounded w-full"
@@ -186,8 +205,11 @@ export function ServiceDetail() {
                 </div>
 
                 <div>
-                  <label className="block font-medium mb-1">Fecha y hora</label>
+                  <label className="block font-medium mb-1" htmlFor="fechaReserva">
+                    Fecha y hora de la reserva
+                  </label>
                   <input
+                    id="fechaReserva"
                     type="datetime-local"
                     className="p-2 border rounded w-full"
                     value={fechaReserva}
